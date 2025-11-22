@@ -98,3 +98,11 @@ See `OOPLinkedList.java`
 \umlcompo[mult=0..1,pos=0.5] {OOPLinkedList}{OOPLinkedList::-Node}
 \umlcompo[mult=0..1,angle1=20,angle2=-20,pos=0.5] {OOPLinkedList::-Node}{OOPLinkedList::-Node}
 \end{tikzpicture}
+
+### 2.5
+It violates SRP because the class has many unrelated methods to do with different parts of the app.
+For example, fetch the data from the database and parsing the XML data are 2 different parts of the application so should be in 2 different classes (as at the moment this class has 3 responsibilities: fetch data from the database, parsing XML data, and printing to the console). See `Q2P5/*.java`.
+
+### 2.6
+#### (a)
+
