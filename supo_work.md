@@ -2,7 +2,7 @@
 header-includes:
 - |
     \usepackage{tikz,cancel}
-    \usetikzlibrary{shapes.geometric}
+    \usepackage{tikz-uml}
 ---
 
 # OOP supervision 1
@@ -75,5 +75,26 @@ On the other hand, I would definitely indicate that if a `Vector2` is mutable (a
 #### (a)
 See `OOPLinkedList.java`
 
+#### (b)
+\begin{tikzpicture} 
+\umlclass{OOPLinkedList}{ 
+  - head : Node
+  }{ 
+  + OOPLinkedList()\\
+  + getHd(): int\\
+  + popHd(): int\\
+  + pushHd(v: int): void\\
+  + length(): int\\
+  + nth(n: int): int
+}
+\umlclass[x=7]{OOPLinkedList::-Node}{
+ + value: int\\ 
+ + next: Node [0..1]
+}{
++ Node(value: int, next: Node [0..1])\\
++ length(): int\\
++ nth(n: int): int}
 
-
+\umlcompo[mult=0..1,pos=0.5] {OOPLinkedList}{OOPLinkedList::-Node}
+\umlcompo[mult=0..1,angle1=20,angle2=-20,pos=0.5] {OOPLinkedList::-Node}{OOPLinkedList::-Node}
+\end{tikzpicture}
