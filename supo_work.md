@@ -108,3 +108,38 @@ For example, fetch the data from the database and parsing the XML data are 2 dif
 See `Q5P6a/StudentRecord.java`
 
 #### (b)
+See `Q5P6b/StudentRecord.java`
+
+#### (c)
+If `hashCode()` and `equals()` is simply based on the reference, then seemingly-equivalent objects will not be treated as equal (i.e. `new Student(a, b, c) != new Student(a, b, c)`) and this is very undesirable as it also breaks `HashMap` and `HashSet` lookups as objects will only be equal to each other if they are physically the same reference so the hash tables will become useless for lookups.
+
+### 2.7
+#### (a)
+\begin{tikzpicture}
+\umlclass{SearchSet}{
+- numElements: int\\
+- head (0..1) $\to$ BinaryTreeNode
+}{
++ SearchSet()\\
++ insert(int): void\\
++ getNumElements(): int\\
++ contains(int): boolean
+}
+\umlclass[x=9]{BinaryTreeNode}{
+- value: int\\
+- right (0..1) $\to$ BinaryTreeNode \\
+- left (0..1) $\to$ BinaryTreeNode
+}{
++ BinaryTreeNode(int)\\
++ getValue(): int\\
++ setValue(int): void\\
++ getLeft(): BinaryTreeNode\\
++ getRight(): BinaryTreeNode\\
++ setRight(BinaryTreeNode): void\\
++ setLeft(BinaryTreeNode): void
+}
+
+\umluniassoc[mult=0..1,pos=0.5,arg=head] {SearchSet}{BinaryTreeNode}
+\umluniassoc[mult=0..1,angle1=110,angle2=70,pos=0.5,arg=left] {BinaryTreeNode}{BinaryTreeNode}
+\umluniassoc[mult=0..1,angle1=-110,angle2=-70,pos=0.5,arg=right] {BinaryTreeNode}{BinaryTreeNode}
+\end{tikzpicture}
