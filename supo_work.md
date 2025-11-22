@@ -53,5 +53,7 @@ Private state with public getters and setters provides encapsulation and this me
 The advantages of this private-by-convention approach is that it allows easier modification of library functions while still making explicit the disclaimer that "this attribute is intended for internal use".. I have found that this modification is needed quite often as library authors can't think of everything and often leave bugs in their code. It would be a massive pain to fork the project and figure out their build process so possibility of making a one-line change to the internals to fix a bug is good if you your code to 'just work'. It is also nice having some indication of whether an attribute being used in a method is build or private.  
 However, some people would argue that this slightly lessens encapsulation. I would say that Java also allows accessing private attributes via reflection but this has a much more convoluted syntax (as it requires using the standard library's `java.lang.reflect.*` classes). This means that in cases where accessing private attributes would be useful (tests, fixing a library), it is a lot more convoluted to do so and the code will be a lot less clear.
 
+### 2.3
+
 
 
