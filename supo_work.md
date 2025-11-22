@@ -40,6 +40,10 @@ See `LowestCommonBit.java`.
 ### 1.8
 See `Question1P8.java`
 
+### 1.9
+`public void Test()` is not a constructor, it's a method with name `Test` so it's never called.
+Therefore, when a new `Test` object is created, only `x = 0` is executed to `0` will be printed. 
 
 
-
+## Section 2: Class Design and Encapsulation
+TODO!!!
