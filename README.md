@@ -13,7 +13,7 @@ Simply right-click on a file and the select `run`.
 
 ## Running all tests
 ### From IntelliJ
-TODO: write instructions here
+Right-click on `src/test/java` and select `Run 'All Tests'`
 
 ### From the command line [^1]
 Run `mvn verify`
