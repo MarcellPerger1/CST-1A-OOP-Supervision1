@@ -46,4 +46,7 @@ Therefore, when a new `Test` object is created, only `x = 0` is executed to `0` 
 
 
 ## Section 2: Class Design and Encapsulation
-TODO!!!
+### 2.1
+Private state with public getters and setters provides encapsulation and this means that the state can only be changed through those getters and setters, so they can perform validation on the data being passed to ensure that the state will always be valid and there aren't any weird bug in unrelated parts of the coe arising from the state being set to an invalid value (this makes debugging easier). Additionally, it allows changing the underlying internal representation of the state in a backwards-compatible way (e.g. you can extract out parts of a class's state into another class - composition) as the attributes can't be accessed by outside code (well, except though reflection but that's a bit of a hack) so if you want to change the attributes, you can simply modify the getters and setters to add extra code to use those new attributes instead of the old ones.
+
+
