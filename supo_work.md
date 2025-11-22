@@ -105,4 +105,6 @@ For example, fetch the data from the database and parsing the XML data are 2 dif
 
 ### 2.6
 #### (a)
+See `Q5P6a/StudentRecord.java`
 
+#### (b)
