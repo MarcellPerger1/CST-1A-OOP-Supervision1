@@ -31,4 +31,11 @@ See `MathUtil.java`
 Because functions cannot be overloaded on return type only as that would mean that Java is unable to deduce which overload is to be used (well, unless it looks at the expected return type but it's clearly not smart enough to do that).
 
 
+### 1.6
+See `TailCallOptimisationCheck.java` - it seems to overflow the stack after a depth of 63000 so it doesn't perform tail call optimisation. This is probably because Java has APIs for accessing frames on the stack so it cannot simply replace the current stack frame when the function performs a tail call.
+
+
+
+
+
 
