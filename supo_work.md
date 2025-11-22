@@ -53,7 +53,24 @@ Private state with public getters and setters provides encapsulation and this me
 The advantages of this private-by-convention approach is that it allows easier modification of library functions while still making explicit the disclaimer that "this attribute is intended for internal use".. I have found that this modification is needed quite often as library authors can't think of everything and often leave bugs in their code. It would be a massive pain to fork the project and figure out their build process so possibility of making a one-line change to the internals to fix a bug is good if you your code to 'just work'. It is also nice having some indication of whether an attribute being used in a method is build or private.  
 However, some people would argue that this slightly lessens encapsulation. I would say that Java also allows accessing private attributes via reflection but this has a much more convoluted syntax (as it requires using the standard library's `java.lang.reflect.*` classes). This means that in cases where accessing private attributes would be useful (tests, fixing a library), it is a lot more convoluted to do so and the code will be a lot less clear.
 
-### 2.3
 
+### 2.3
+#### (a)
+See `Vector2D.java`
+
+#### (b)
+The `add`, `divide`, and `normalize` methods need to be changed to return a new vector rather that modifying the current vector. Also, setters need to be removed.
+
+#### (c)
+1. The first one is suitable for mutable vectors only as it doesn't return anything (so the method changes the values stored) so it would be useless for the pure immutable vector add as it doesn't return a value.
+2. Suitable for immutable vectors as it simply adds `this` and `v` and returns the new value. Also suitable for mutable vectors as it can change `this` in place and then return `this` so that it can be used with method chaining.
+3. This version would either add 3 vectors or would ignore one of the vectors (probably `this`). Ignoring one of the passed vectors isn't sensible so I assume it adds 3 vectors and apart from adding an extra vector, it's exactly the same as 2 (though a method to add 3 vectors seems rather useless as it's the same as calling the 2-vector method twice)
+4. Suitable for the immutable version as it means that vectors can be added like `Vector2D.add(v1, v2)` and it returns the result. Probably not suitable for the mutable version as it's less clear here which one to modify and the syntax makes it feel like it shouldn't modify any arguments.
+
+#### (d)
+Personally, I think the expectation for a `Vector2` class is that it's immutable as it's very close to the mathematical concept of a vector and has most of the operations that you can do on real numbers and `double`s are immutable so I'd expect a `Vector2` to be immutable. So I think a note in it's documentation is enough to convey it to unsure users.  
+On the other hand, I would definitely indicate that if a `Vector2` is mutable (as I would expect them to be immutable, see above). I would probably indicate this by changing the class name to `MutVector2` or `Vector2Mut` so that even users reading unfamiliar code that contains this class will instantly understand that this vector is mutable.
+
+### 2.4
 
 
