@@ -34,7 +34,11 @@ Because functions cannot be overloaded on return type only as that would mean th
 ### 1.6
 See `TailCallOptimisationCheck.java` - it seems to overflow the stack after a depth of 63000 so it doesn't perform tail call optimisation. This is probably because Java has APIs for accessing frames on the stack so it cannot simply replace the current stack frame when the function performs a tail call.
 
+### 1.7
+See `LowestCommonBit.java`.
 
+### 1.8
+See `Question1P8.java`
 
 
 
