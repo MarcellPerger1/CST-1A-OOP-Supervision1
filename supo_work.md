@@ -143,3 +143,6 @@ If `hashCode()` and `equals()` is simply based on the reference, then seemingly-
 \umluniassoc[mult=0..1,angle1=110,angle2=70,pos=0.5,arg=left] {BinaryTreeNode}{BinaryTreeNode}
 \umluniassoc[mult=0..1,angle1=-110,angle2=-70,pos=0.5,arg=right] {BinaryTreeNode}{BinaryTreeNode}
 \end{tikzpicture}
+
+#### (b)
+See `Q2P7/*.java`. TODO: tests.
