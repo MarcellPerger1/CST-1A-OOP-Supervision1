@@ -3,6 +3,7 @@ header-includes:
 - |
     \usepackage{tikz,cancel}
     \usepackage{tikz-uml}
+    \usetikzlibrary{shapes.geometric,positioning}
 ---
 
 # OOP supervision 1
@@ -145,4 +146,84 @@ If `hashCode()` and `equals()` is simply based on the reference, then seemingly-
 \end{tikzpicture}
 
 #### (b)
-See `Q2P7/*.java`. TODO: tests.
+See `Q2P7/{BinaryTreeNode,SearchSet}.java`.
+
+#### (c)
+See `Q2P7/FunctionalArray.java`.
+
+
+## Section 3: Points, References and Memory
+### 3.1
+The advantage of using references oover pointers is that a reference is either null or a useful value and this means that the code can detect if it's a null value and raise a `NullPointerException` that can be caught and (relatively) elegantly handled. However, pointers can point to null, a useful value, or just some other block of memory. This means that it is impossible to distinguish between pointers to a valid object and pointers to another block of memory (potentially owned by another process or maybe already freed and being used for something else). This means that the code can't elegantly raise an exception if it receives an invalid pointer so the OS will just kill the process (via `SIGSEGV`) so the process will shut down without doing any required cleanup. Or, even worse, that pointer could be pointing to some memory that has been freed and now contains sensitive information like passwords and this could cause security vulnerabilities if a pointer is accidentally used after the memory is freed.
+
+### 3.2
+\begin{tikzpicture}
+\node[rectangle,draw] (P) at (0,0) {p};
+\node[rectangle,draw] (P2) at (0,-1) {p2};
+\node[rectangle,draw] (N) at (2,0) {NULL};
+\node[rectangle,draw] (PP1) at (2,-1) {0x1234};
+\node[rectangle,draw] (PO1) at (5,-1) {Person:0x1234};
+\node (D0) at (4, -1.5) {};
+\node (D1) at (4, -2.5) {};
+
+\path[->] (P2)  edge node {} (PP1) 
+          (PP1) edge node {} (PO1);
+\path[->] (P) edge (N);
+\path[->] (D0) edge (D1);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node[rectangle,draw] (P) at (0,0) {p};
+\node[rectangle,draw] (P2) at (0,-1) {p2};
+\node[rectangle,draw] (PP1) at (2,-1) {0x1234};
+\node[rectangle,draw] (PP1B) at (2,0) {0x1234};
+\node[rectangle,draw] (PO1) at (5,-1) {Person:0x1234};
+\node (D0) at (4, -1.5) {};
+\node (D1) at (4, -2.5) {};
+
+\path[->] (P2)  edge node {} (PP1) 
+          (PP1) edge node {} (PO1);
+\path[->] (P) edge node {} (PP1B)
+          (PP1B) edge node {} (PO1);
+\path[->] (D0) edge (D1);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node[rectangle,draw] (P) at (0,0) {p};
+\node[rectangle,draw] (P2) at (0,-1) {p2};
+\node[rectangle,draw] (PP1) at (2,-1) {0x5678};
+\node[rectangle,draw] (PP1B) at (2,0) {0x1234};
+\node[rectangle,draw] (PO1) at (5,0) {Person:0x1234};
+\node[rectangle,draw] (PO2) at (5,-1) {Person:0x5678};
+\node (D0) at (4, -1.5) {};
+\node (D1) at (4, -2.5) {};
+
+\path[->] (P2)  edge node {} (PP1) 
+          (PP1) edge node {} (PO2);
+\path[->] (P) edge node {} (PP1B)
+          (PP1B) edge node {} (PO1);
+\path[->] (D0) edge (D1);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node[rectangle,draw] (P) at (0,0) {p};
+\node[rectangle,draw] (P2) at (0,-1) {p2};
+\node[rectangle,draw] (N) at (2,0) {NULL};
+\node[rectangle,draw] (PP1) at (2,-1) {0x5678};
+\node[rectangle,draw] (PO1) at (5,-1) {Person:0x5678};
+\node (D0) at (4, -1.5) {};
+\node (D1) at (4, -2.5) {};
+
+\path[->] (P2)  edge node {} (PP1) 
+          (PP1) edge node {} (PO1);
+\path[->] (P) edge (N);
+\end{tikzpicture}
+
+### 3.3
+For the first `println`, the `add(int, int, int, int)` is called. All of the arguments are passed by value and as they are primitives, this means that the integers themselves are passed in. This means that the modifications in the function only affect the locals copies of the variables and don't propagate outside as the entire value has been copied. Therefore, `1 1` is printed.  
+For the second `println`, the `add(int[], int, int)` is called. A reference to the array is passed by value (as well as the two `int`s), i.e. the memory address of the array is passed by value so the `xy` in the function still refers to the same bit of memory as `xypair` so when `xy`'s elements are updated, `xy`'s elements will also change (as they're literally the same array). Therefore, `2 2` will now be printed.
+
+### 3.4
+
+
+
