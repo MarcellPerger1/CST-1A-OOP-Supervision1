@@ -211,8 +211,6 @@ The advantage of using references oover pointers is that a reference is either n
 \node[rectangle,draw] (N) at (2,0) {NULL};
 \node[rectangle,draw] (PP1) at (2,-1) {0x5678};
 \node[rectangle,draw] (PO1) at (5,-1) {Person:0x5678};
-\node (D0) at (4, -1.5) {};
-\node (D1) at (4, -2.5) {};
 
 \path[->] (P2)  edge node {} (PP1) 
           (PP1) edge node {} (PO1);
@@ -224,6 +222,8 @@ For the first `println`, the `add(int, int, int, int)` is called. All of the arg
 For the second `println`, the `add(int[], int, int)` is called. A reference to the array is passed by value (as well as the two `int`s), i.e. the memory address of the array is passed by value so the `xy` in the function still refers to the same bit of memory as `xypair` so when `xy`'s elements are updated, `xy`'s elements will also change (as they're literally the same array). Therefore, `2 2` will now be printed.
 
 ### 3.4
+See `ValueRefDemo.java`.
 
+### 3.5
 
 
