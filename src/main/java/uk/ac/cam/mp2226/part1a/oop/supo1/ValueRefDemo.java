@@ -13,8 +13,6 @@ public class ValueRefDemo {
         System.out.println("in reassignArray: " + Arrays.toString(a));
     }
 
-
-
     public static void main(String[] args) {
         {
             int[] a = {0, 2};

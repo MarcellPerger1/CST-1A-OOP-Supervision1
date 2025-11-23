@@ -225,5 +225,14 @@ For the second `println`, the `add(int[], int, int)` is called. A reference to t
 See `ValueRefDemo.java`.
 
 ### 3.5
+Advantages:
+- Consistent handling of primitives and non-primitives makes it so that the programmer doesn't need to think about whether something is a primitive or not.
+- Lower memory consumption than just pass-by-value as no values are copied.
+- Faster than pass-by-value for non-primitives as it doesn't have to copy possibly-huge data structures.
+- Inner functions can propagate any value changes out, so multiple returns cld be implemented by passing in a variable that will be reassigned by the function (I think C# might have something like this?).
+- Passing all values by reference allows something that Java doesn't have: passing primitive types directly into generics (i.e. `ArrayList<int>` works, you don't need to do `ArrayList<Integer>`)
 
-
+Disadvantages:
+- Higher memory usage than Java's hybrid method as passing primitives takes up at least 8 bytes (the size of an address) and all primitives have size at most 8 bytes (most are less 8 bytes though)
+- Can be slower than the hybrid approach for primitives as an extra level of indirection is added (which might be quite slow if it isn't in the CPU's cache)
+- Sometimes, you accidentally reassign a variable in a function and often, you don't want those changes propagating to the users of the function (it's actually quite rare that the arguments are completely reassigned) 
